@@ -1,2 +1,2 @@
-# api-cadastro-contatos
-RestAPI para cadastro de contatos. Com integração com Front-End.
+# AGENDA PESSOAL
+RestAPI para cadastro de pessoa, e cadastro de contatos para cada pessoa. Com integração com Front-End.
