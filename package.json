@@ -1,0 +1,19 @@
+{
+  "name": "api-cadastro-contatos",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:discacciati/api-cadastro-contatos.git",
+  "author": "Eliane Discacciati <discacciati@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "sucrase": "^3.27.0"
+  }
+}
