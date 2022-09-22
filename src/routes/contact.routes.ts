@@ -1,17 +1,19 @@
 import { Router } from "express";
-import createContact from "../controllers/contact/createContact.controller";
-import showContact from "../controllers/contact/showContact.controller";
-import listContact from "../controllers/contact/listContact.controller";
-import updateContact from "../controllers/contact/updateContact.controller";
-import deleteContact from "../controllers/contact/deleteContact.controller";
+import {
+  createContactController,
+  showContactController,
+  listContactController,
+  updateContactController,
+  deleteContactController,
+} from "../controllers/contact/contact.controllers";
 import VerifyToken from "../middelwares/verifyToken.middleware";
 
 const contactRoute = Router();
 
-contactRoute.post("/new", createContact);
-contactRoute.get("/", VerifyToken, listContact);
-contactRoute.get("/:id", VerifyToken, showContact);
-contactRoute.patch("/:id", VerifyToken, updateContact);
-contactRoute.delete("/:id", VerifyToken, deleteContact);
+contactRoute.post("/new", createContactController);
+contactRoute.get("/", VerifyToken, listContactController);
+contactRoute.get("/:id", VerifyToken, showContactController);
+contactRoute.patch("/:id", VerifyToken, updateContactController);
+contactRoute.delete("/:id", VerifyToken, deleteContactController);
 
 export default contactRoute;
