@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import createUserService from "../services/users/createUser.service";
-import deleteUserService from "../services/users/deleteUser.service";
-import listUserService from "../services/users/listUser.service";
-import showUserService from "../services/users/showUser.service";
-import updateUserService from "../services/users/updateUser.service";
+import createUserService from "../../services/user/createUser.service";
+import deleteUserService from "../../services/user/deleteUser.service";
+import listUserService from "../../services/user/listUser.service";
+import showUserService from "../../services/user/showUser.service";
+import updateUserService from "../../services/user/updateUser.service";
 import { instanceToPlain } from "class-transformer";
 
 const createUserController = async (req: Request, res: Response) => {
@@ -24,27 +24,23 @@ const listUserController = async (req: Request, res: Response) => {
 };
 
 const showUserController = async (req: Request, res: Response) => {
-  const userId = req.params.userId;
-  const user = await showUserService({ userId });
+  const id = req.params.id;
+  const user = await showUserService(id);
   return res.json(instanceToPlain(user));
 };
 
 const updateUserController = async (req: Request, res: Response) => {
-  const userId = req.params.userId;
-  const { full_name, emails, password, phones } = req.body;
+  const id = req.params.id;
   const userUpdate = await updateUserService({
-    userId,
-    full_name,
-    emails,
-    password,
-    phones,
+    id,
+    req.body
   });
   return res.status(201).json(instanceToPlain(userUpdate));
 };
 
 const deleteUserController = async (req: Request, res: Response) => {
-  const userId = req.params.userId;
-  await deleteUserService(userId);
+  const id = req.params.id;
+  await deleteUserService(id);
   return res.status(204).send();
 };
 

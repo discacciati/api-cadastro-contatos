@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import createContactService from "../services/contact/createContact.service";
-import deleteContactService from "../services/contact/deleteContact.service";
-import listContactService from "../services/contact/listContact.service";
-import showContactService from "../services/contact/showContact.service";
-import updateContactService from "../services/contact/updateContact.service";
+import createContactService from "../../services/contact/createContact.service";
+import deleteContactService from "../../services/contact/deleteContact.service";
+import listContactService from "../../services/contact/listContact.service";
+import showContactService from "../../services/contact/showContact.service";
+import updateContactService from "../../services/contact/updateContact.service";
 import { instanceToPlain } from "class-transformer";
 
 const createContactController = async (req: Request, res: Response) => {
@@ -22,16 +22,16 @@ const listContactController = async (req: Request, res: Response) => {
 };
 
 const showContactController = async (req: Request, res: Response) => {
-  const contactId = req.params.contactId;
-  const contact = await showContactService({ contactId });
+  const id = req.params.id;
+  const contact = await showContactService(id);
   return res.json(instanceToPlain(contact));
 };
 
 const updateContactController = async (req: Request, res: Response) => {
-  const contactId = req.params.contactId;
+  const id = req.params.id;
   const { full_name, emails, password, phones } = req.body;
   const contactUpdate = await updateContactService({
-    contactId,
+    id,
     full_name,
     emails,
     phones,
@@ -40,8 +40,8 @@ const updateContactController = async (req: Request, res: Response) => {
 };
 
 const deleteContactController = async (req: Request, res: Response) => {
-  const contactId = req.params.contactId;
-  await deleteContactService(contactId);
+  const id = req.params.id;
+  await deleteContactService(id);
   return res.status(204).send();
 };
 

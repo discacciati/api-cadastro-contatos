@@ -18,3 +18,10 @@ export interface IContact {
   emails: IEmailContactRequest;
   phones: IPhoneContactRequest;
 }
+
+export interface IContactUpdate {
+  id: string;
+  full_name: string;
+  emails: IEmailContactRequest;
+  phones: IPhoneContactRequest;
+}

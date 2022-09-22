@@ -6,7 +6,7 @@ import {
   updateContactController,
   deleteContactController,
 } from "../controllers/contact/contact.controllers";
-import VerifyToken from "../middelwares/verifyToken.middleware";
+import VerifyToken from "../middlewares/verifyToken.middleware";
 
 const contactRoute = Router();
 

@@ -1,11 +1,12 @@
 import { Contact } from "../../entities/contact.entity";
+import { IContact } from "../../interfaces/contacts";
 import AppDataSource from "../../data-source";
 
-const showContactService = async (contactId: string): Promise<Contact> => {
+const showContactService = async (id: string): Promise<IContact> => {
   const contactRepository = AppDataSource.getRepository(Contact);
 
   const contact = await contactRepository.findOne({
-    where: { id: contactId },
+    where: { id: id },
   });
 
   return contact;

@@ -27,3 +27,11 @@ export interface IUserLogin {
   full_name: string;
   password: string;
 }
+
+export interface IUserUpdate {
+  id: string;
+  full_name: string;
+  password: string;
+  emails: IEmailUserRequest;
+  phones: IPhoneUserRequest;
+}

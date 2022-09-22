@@ -7,8 +7,8 @@ import {
   showUserController,
   updateUserController,
 } from "../controllers/user/user.controllers";
-import VerifyToken from "../middelwares/verifyToken.middleware";
-import VerifyAdmin from "../middelwares/verifyAdmin.middleware";
+import VerifyToken from "../middlewares/verifyToken.middleware";
+import VerifyAdmin from "../middlewares/verifyAdmin.middleware";
 
 const userRoute = Router();
 
