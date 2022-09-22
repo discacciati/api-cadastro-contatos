@@ -13,6 +13,7 @@ const updateUserService = async (id: string, userDataUpdate: any) => {
   const findUser = await userRepository.findOne({
     where: { id },
   });
+  console.log(findUser);
   if (!findUser) {
     throw new AppError("User not found", 401);
   }

@@ -9,6 +9,7 @@ import {
 import { Exclude } from "class-transformer";
 import { EmailUser } from "./emailUser.entity";
 import { PhoneUser } from "./phoneUser.entity";
+import { Contact } from "./contact.entity";
 
 @Entity("user")
 class User {
@@ -33,6 +34,9 @@ class User {
 
   @OneToMany(() => PhoneUser, (phone) => phone.user)
   phones: PhoneUser[];
+
+  @OneToMany(() => Contact, (contact) => contact.user)
+  contacts: Contact[];
 }
 
 export { User };

@@ -4,7 +4,7 @@ import express from "express";
 import "dotenv/config";
 import userRoute from "./routes/user.routes";
 import contactRoute from "./routes/contact.routes";
-import handleAppErrorMiddeware from "./middlewares/handleAppError.middleware";
+import handleAppErrorMiddeware from "./middlewares/handleAppErrorMiddleware";
 
 const app = express();
 app.use(express.json());
