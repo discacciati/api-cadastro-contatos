@@ -9,7 +9,7 @@ const createContactService = async ({
   emails,
   phones,
   full_name,
-}: IContactRequest): Promise<IContact> => {
+}: IContactRequest) => {
   const contactRepository = AppDataSource.getRepository(Contact);
   const emailRepository = AppDataSource.getRepository(EmailContact);
   const phoneRepository = AppDataSource.getRepository(PhoneContact);

@@ -1,6 +1,8 @@
 import { IUserRequest, IUser } from "../../interfaces/users";
 import AppDataSource from "../../data-source";
 import { User } from "../../entities/user.entity";
+import { EmailUser } from "../../entities/emailUser.entity";
+import { PhoneUser } from "../../entities/phoneUser.entity";
 import { hash } from "bcryptjs";
 import { AppError } from "../../errors/AppError";
 
@@ -10,8 +12,10 @@ const createUserService = async ({
   phones,
   password,
   full_name,
-}: IUserRequest): Promise<IUser> => {
+}: IUserRequest) => {
   const userRepository = AppDataSource.getRepository(User);
+  const emailRepository = AppDataSource.getRepository(EmailUser);
+  const phoneRepository = AppDataSource.getRepository(PhoneUser);
   const findUser = await userRepository.findOne({
     where: { full_name },
   });
@@ -21,28 +25,23 @@ const createUserService = async ({
 
   const hashedPassword = await hash(password, 10);
 
-
-
-
   const user = userRepository.create({
     isAdm,
     full_name,
     password: hashedPassword,
-    isActive: true,
     emails: [],
     phones: [],
   });
 
   await userRepository.save(user);
 
-  fazer um email.map, e dentro dele coloco o emailRepository.create ({email, user})
+  Object.keys(emails).map((email) => emailRepository.create({ email, user }));
 
-  phone getRepository
-  create
+  Object.keys(phones).map((phone) => phoneRepository.create({ phone, user }));
 
-  fazer um get no userrepository,m findOne (id do usuario novo) e retorno esse usuario;
+  const userComplete = userRepository.findOne({ where: { full_name } });
 
-  return user;
+  return userComplete;
 };
 
 export default createUserService;

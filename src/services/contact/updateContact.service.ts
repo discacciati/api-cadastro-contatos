@@ -5,35 +5,34 @@ import { EmailContact } from "../../entities/emailContact.entity";
 import { PhoneContact } from "../../entities/phoneContact.entity";
 import { AppError } from "../../errors/AppError";
 
-const updateContactService = async ({
-  id,
-  full_name,
-  emails,
-  phones,
-}: IContactUpdate): Promise<IContact> => {
+const updateContactService = async (id: string, contactDataUpdate: any) => {
   const contactRepository = AppDataSource.getRepository(Contact);
   const emailRepository = AppDataSource.getRepository(EmailContact);
   const phoneRepository = AppDataSource.getRepository(PhoneContact);
-  const findUser = await contactRepository.findOne({
-    where: { full_name },
+  const findContact = await contactRepository.findOne({
+    where: { id },
   });
-  if (findUser) {
-    throw new AppError("User already exists");
+  if (!findContact) {
+    throw new AppError("User not found", 401);
   }
 
-  const contact = contactRepository.update(id, { ...AppDataSource });
+  if (contactDataUpdate.emails) {
+    Object.keys(contactDataUpdate.emails).map((email) =>
+      emailRepository.update(id, { email })
+    );
+  }
 
-  await contactRepository.save();
+  if (contactDataUpdate.phones) {
+    Object.keys(contactDataUpdate.phones).map((phone) =>
+      phoneRepository.update(id, { phone })
+    );
+  }
 
-  Object.keys(emails).map((email) =>
-    emailRepository.update({ email, contact })
-  );
+  if (contactDataUpdate.full_name) {
+    await contactRepository.update(id, { ...contactDataUpdate.full_name });
+  }
 
-  Object.keys(phones).map((phone) =>
-    phoneRepository.uodate({ phone, contact })
-  );
-
-  const contactComplete = contactRepository.findOne({ where: { full_name } });
+  const contactComplete = contactRepository.findOne({ where: { id } });
 
   return contactComplete;
 };

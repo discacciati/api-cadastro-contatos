@@ -31,10 +31,8 @@ const showUserController = async (req: Request, res: Response) => {
 
 const updateUserController = async (req: Request, res: Response) => {
   const id = req.params.id;
-  const userUpdate = await updateUserService({
-    id,
-    req.body
-  });
+  const userDataUpdate = req.body;
+  const userUpdate = await updateUserService(id, userDataUpdate);
   return res.status(201).json(instanceToPlain(userUpdate));
 };
 

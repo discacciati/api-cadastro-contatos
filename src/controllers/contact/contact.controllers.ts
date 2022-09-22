@@ -29,13 +29,8 @@ const showContactController = async (req: Request, res: Response) => {
 
 const updateContactController = async (req: Request, res: Response) => {
   const id = req.params.id;
-  const { full_name, emails, password, phones } = req.body;
-  const contactUpdate = await updateContactService({
-    id,
-    full_name,
-    emails,
-    phones,
-  });
+  const contactDataUpdate = req.body;
+  const contactUpdate = await updateContactService(id, contactDataUpdate);
   return res.status(201).json(instanceToPlain(contactUpdate));
 };
 

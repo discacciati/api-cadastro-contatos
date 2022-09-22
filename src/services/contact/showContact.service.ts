@@ -2,7 +2,7 @@ import { Contact } from "../../entities/contact.entity";
 import { IContact } from "../../interfaces/contacts";
 import AppDataSource from "../../data-source";
 
-const showContactService = async (id: string): Promise<IContact> => {
+const showContactService = async (id: string) => {
   const contactRepository = AppDataSource.getRepository(Contact);
 
   const contact = await contactRepository.findOne({
