@@ -26,7 +26,7 @@ const createContactService = async (
     throw new AppError("User not found");
   }
   if (findContact) {
-    throw new AppError("User already exists");
+    throw new AppError("Contact already exists");
   }
 
   const contact = contactRepository.create({
