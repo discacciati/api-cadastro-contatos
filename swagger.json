@@ -1,0 +1,248 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Api Cadastro de Contatos",
+    "description": "descrição do projeto",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "path": {
+    "/user/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "full_name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "isAdm": {
+                    "type": "boolean"
+                  },
+                  "phones": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "phone": "string"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "phone": "string"
+                      }
+                    }
+                  ],
+                  "emails": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "email": "string"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "email": "string"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "User already exist"
+          },
+          "201": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user/": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user/:id": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "id": "id",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/contact/new": {
+      "post": {
+        "tags": [
+          "Contact"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "full_name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "isAdm": {
+                    "type": "boolean"
+                  },
+                  "phones": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "phone": "string"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "phone": "string"
+                      }
+                    }
+                  ],
+                  "emails": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "email": "string"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "email": "string"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "User already exist"
+          },
+          "201": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/contact/": {
+      "get": {
+        "tags": [
+          "Contact"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/contact/:id": {
+      "get": {
+        "tags": [
+          "Contact"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "id": "id",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
