@@ -5,10 +5,6 @@
   "repository": "git@github.com:discacciati/api-cadastro-contatos.git",
   "author": "Eliane Discacciati <discacciati@gmail.com>",
   "license": "MIT",
-  "keywords": [
-    "example",
-    "heroku"
-  ],
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules --poll src/server.ts",
     "build": "tsc",
