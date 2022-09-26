@@ -7,16 +7,18 @@ import {
 } from "typeorm";
 import { User } from "./user.entity";
 
-@Entity("emailUser")
-@Unique(["email"])
+@Entity("emailsUser")
 class EmailUser {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ unique: true })
+  @Column()
   email: string;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne((type) => User, (user) => user.emailsUser, {
+    eager: true,
+    onDelete: "CASCADE",
+  })
   user: User;
 }
 

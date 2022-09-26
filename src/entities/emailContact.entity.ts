@@ -7,16 +7,18 @@ import {
 } from "typeorm";
 import { Contact } from "./contact.entity";
 
-@Entity("emailContact")
-@Unique(["email"])
+@Entity("emailsContact")
 class EmailContact {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ unique: true })
+  @Column()
   email: string;
 
-  @ManyToOne(() => Contact, { eager: true })
+  @ManyToOne((type) => Contact, (contact) => contact.emailsContact, {
+    eager: true,
+    onDelete: "CASCADE",
+  })
   contact: Contact;
 }
 

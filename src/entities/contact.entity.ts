@@ -6,12 +6,13 @@ import {
   Unique,
   OneToMany,
   ManyToOne,
+  JoinColumn,
 } from "typeorm";
 import { EmailContact } from "./emailContact.entity";
 import { PhoneContact } from "./phoneContact.entity";
 import { User } from "./user.entity";
 
-@Entity("user")
+@Entity("contacts")
 class Contact {
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -19,13 +20,17 @@ class Contact {
   @Column()
   full_name: string;
 
-  @OneToMany(() => EmailContact, (email) => email.contact)
-  emails: EmailContact[];
+  @OneToMany((type) => EmailContact, (emailContact) => emailContact.contact, {
+    cascade: true,
+  })
+  emailsContact: EmailContact[];
 
-  @OneToMany(() => PhoneContact, (phone) => phone.contact)
-  phones: PhoneContact[];
+  @OneToMany((type) => PhoneContact, (phoneContact) => phoneContact.contact, {
+    cascade: true,
+  })
+  phonesContact: PhoneContact[];
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User, { eager: true, onDelete: "CASCADE" })
   user: User;
 }
 

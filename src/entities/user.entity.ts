@@ -3,7 +3,6 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  Unique,
   OneToMany,
 } from "typeorm";
 import { Exclude } from "class-transformer";
@@ -19,7 +18,7 @@ class User {
   @Column()
   full_name: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Exclude()
   password: string;
 
@@ -29,13 +28,19 @@ class User {
   @CreateDateColumn()
   createdAt: Date;
 
-  @OneToMany(() => EmailUser, (email) => email.user)
-  emails: EmailUser[];
+  @OneToMany((type) => EmailUser, (emailUser) => emailUser.user, {
+    cascade: true,
+  })
+  emailsUser: EmailUser[];
 
-  @OneToMany(() => PhoneUser, (phone) => phone.user)
-  phones: PhoneUser[];
+  @OneToMany((type) => PhoneUser, (phoneUser) => phoneUser.user, {
+    cascade: true,
+  })
+  phonesUser: PhoneUser[];
 
-  @OneToMany(() => Contact, (contact) => contact.user)
+  @OneToMany((type) => Contact, (contact) => contact.user, {
+    cascade: true,
+  })
   contacts: Contact[];
 }
 

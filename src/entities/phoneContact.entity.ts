@@ -7,7 +7,7 @@ import {
 } from "typeorm";
 import { Contact } from "./contact.entity";
 
-@Entity("phoneContact")
+@Entity("phonesContact")
 class PhoneContact {
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -15,7 +15,10 @@ class PhoneContact {
   @Column()
   phone: string;
 
-  @ManyToOne(() => Contact, { eager: true })
+  @ManyToOne((type) => Contact, (contact) => contact.phonesContact, {
+    eager: true,
+    onDelete: "CASCADE",
+  })
   contact: Contact;
 }
 

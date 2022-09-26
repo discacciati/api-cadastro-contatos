@@ -10,7 +10,7 @@ const deleteUserService = async (id: string): Promise<void> => {
     throw new AppError("User not found", 404);
   }
 
-  await userRepository.delete(user);
+  await userRepository.delete(id);
 };
 
 export default deleteUserService;

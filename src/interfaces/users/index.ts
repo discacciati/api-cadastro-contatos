@@ -1,3 +1,5 @@
+import { IContact } from "../contacts";
+
 export interface IEmailUserRequest {
   email: string;
 }
@@ -10,8 +12,8 @@ export interface IUserRequest {
   full_name: string;
   password: string;
   isAdm: boolean;
-  emails: IEmailUserRequest;
-  phones: IPhoneUserRequest;
+  emails: IEmailUserRequest[];
+  phones: IPhoneUserRequest[];
 }
 
 export interface IUser {
@@ -19,8 +21,9 @@ export interface IUser {
   full_name: string;
   isAdm: boolean;
   createdAt: Date;
-  emails: IEmailUserRequest;
-  phones: IPhoneUserRequest;
+  emails: [];
+  phones: [];
+  contacts: [];
 }
 
 export interface IUserLogin {
@@ -32,6 +35,6 @@ export interface IUserUpdate {
   id: string;
   full_name: string;
   password: string;
-  emails: IEmailUserRequest;
-  phones: IPhoneUserRequest;
+  emails: IEmailUserRequest[];
+  phones: IPhoneUserRequest[];
 }

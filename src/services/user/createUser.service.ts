@@ -14,7 +14,7 @@ const createUserService = async ({
   full_name,
 }: IUserRequest) => {
   const userRepository = AppDataSource.getRepository(User);
-  const emailRepository = AppDataSource.getRepository(EmailUser);
+
   const phoneRepository = AppDataSource.getRepository(PhoneUser);
   const findUser = await userRepository.findOne({
     where: { full_name },
@@ -29,15 +29,24 @@ const createUserService = async ({
     isAdm,
     full_name,
     password: hashedPassword,
-    emails: [],
-    phones: [],
+    emailsUser: [],
+    phonesUser: [],
+    contacts: [],
   });
 
   await userRepository.save(user);
 
-  Object.keys(emails).map((email) => emailRepository.create({ email, user }));
+  const emailRepository = AppDataSource.getRepository(EmailUser);
 
-  Object.keys(phones).map((phone) => phoneRepository.create({ phone, user }));
+  const emailSave = emailRepository.create({ email: emails[0].email, user });
+
+  await emailRepository.save(emailSave);
+
+  const phoneSave = phoneRepository.create({ phone: phones[0].phone, user });
+
+  await phoneRepository.save(phoneSave);
+
+  // Object.keys(phones).map((phone) => phoneRepository.create({ phone, user }));
 
   const userComplete = userRepository.findOne({ where: { full_name } });
 
